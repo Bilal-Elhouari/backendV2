@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "gestion_user",
+    "password": "1234",
+    "database": "backend_db",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "gestion_user",
+    "password": "1234",
+    "database": "backend_db",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "gestion_user",
+    "password": "1234",
+    "database": "backend_db",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
