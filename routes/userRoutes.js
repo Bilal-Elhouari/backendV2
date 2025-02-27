@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
+const Product = require('../models/Product');
 
 // Créer un utilisateur
 router.post('/', async (req, res) => {
@@ -53,15 +54,25 @@ router.delete('/:id', async (req, res) => {
   try {
     const userId = req.params.id;
     const user = await User.findByPk(userId);
+
     if (!user) {
       return res.status(404).json({ message: "Utilisateur non trouvé" });
     }
-
-    await user.destroy();
-    res.json({ message: "Utilisateur supprimé avec succès" });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+ // Supprimer tous les produits associés à cet utilisateur
+ await Product.destroy({
+  where: { userId: userId }
 });
+
+// Supprimer l'utilisateur
+await user.destroy();
+
+res.json({ message: "Utilisateur et ses produits supprimés avec succès" });
+} catch (error) {
+res.status(500).json({ error: error.message });
+}
+});
+
+
+
 
 module.exports = router;
